@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypto Bot – Paper Trading</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <div class="banner">DEMO MONEY – paper trading. Real live Luno prices, pretend trades. Nothing is bought or sold for real.</div>
+  <h1>Crypto Bot – Paper Trading</h1>
+  <p class="sub" id="updated">Loading…</p>
+  <div id="stale" class="warn hidden"></div>
+
+  <section class="cards" id="cards"></section>
+
+  <section>
+    <h2>Balance over time</h2>
+    <div id="legend" class="legend"></div>
+    <div id="chart" class="chart"></div>
+  </section>
+
+  <section>
+    <h2>Strategies now</h2>
+    <div id="strats" class="strats"></div>
+    <p class="note" id="signal"></p>
+  </section>
+
+  <section>
+    <h2>Bot health</h2>
+    <dl id="health" class="kv"></dl>
+  </section>
+
+  <section>
+    <h2>Trades <span class="muted" id="tradecount"></span></h2>
+    <div class="scroll"><table id="trades"></table></div>
+    <p class="note hidden" id="notrades">No demo trades yet. Each buy and sell will appear here.</p>
+  </section>
+
+  <section>
+    <h2>Alerts</h2>
+    <ul id="alerts" class="alerts"></ul>
+    <p class="note hidden" id="noalerts">No alerts.</p>
+  </section>
+
+  <details>
+    <summary>The rules</summary>
+    <ul class="rules">
+      <li><b>Slow scalper:</b> only when the 1-hour trend is not falling. When the 15-min RSI is 30 or lower, a demo limit buy 0.3% below the price, filled only if real trades go below it. Sell at +2%, or −1% stop-loss, or after 72 hours.</li>
+      <li><b>Trend following:</b> buy when the hourly close is above EMA20, EMA20 is above EMA50 and the close breaks the last hour's high. Stop-loss 2×ATR that only moves up. Sell when the trend breaks.</li>
+      <li><b>Limits for each:</b> at most half its capital per trade, a stop-loss on every trade, stop for the day after losing 3%.</li>
+      <li><b>Kill switch:</b> BTC down 3% in 15 minutes or a 5× volume spike: close everything and pause 2 hours.</li>
+      <li>Fees are included (0.35% limit orders, 0.6% instant orders). A bot only follows rules faster; it does not make a bad strategy good. This is a test, not a promise.</li>
+    </ul>
+  </details>
+  <p class="foot">Updates on every trade and alert, and at least every 6 hours. This page re-checks every 60 seconds while open.</p>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
