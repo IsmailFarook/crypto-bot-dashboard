@@ -90,7 +90,7 @@
       {k: "bh", name: "Buy and hold", c: "var(--c3)", dash: true}];
     $("legend").innerHTML = series.map(function (s) { return '<span><i style="background:' + s.c + '"></i>' + s.name + "</span>"; }).join("");
     if (!hist || hist.length < 2) { $("chart").innerHTML = '<p class="note">The chart appears after the first few balance points (one every 5 minutes).</p>'; return; }
-    var W = 720, H = 260, L = 56, R = 10, T = 10, B = 28;
+    var W = Math.max(320, Math.round($("chart").clientWidth || 720)), H = W < 500 ? 220 : 260, L = 56, R = 10, T = 10, B = 28;
     var vals = [];
     hist.forEach(function (p) { series.forEach(function (s) { vals.push(p[s.k]); }); });
     var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
@@ -121,6 +121,7 @@
       .then(function (j) { data = j; render(); })
       .catch(function () { if (!data) $("updated").textContent = "Could not load data yet. Retrying every minute."; });
   }
+  window.addEventListener("resize", function () { if (data) chart(data.history); });
   load();
   setInterval(load, 60000);
   setInterval(function () { if (data) render(); }, 30000);
